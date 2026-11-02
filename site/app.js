@@ -144,10 +144,17 @@ const srcById = new Map();
 let VIDEOS = [];
 let PODS = [];
 
-async function loadCatalog() {
+async function fetchCatalog() {
+  // no-cache = revalidate with the server; unchanged files come back as a cheap 304.
   const res = await fetch('data/catalog.json', { cache: 'no-cache' });
   if (!res.ok) throw new Error(`catalog: HTTP ${res.status}`);
-  CAT = await res.json();
+  return res.json();
+}
+
+async function loadCatalog(data) {
+  CAT = data || await fetchCatalog();
+  byId.clear();
+  srcById.clear();
   for (const s of CAT.sources) srcById.set(s.id, s);
   for (const it of CAT.items) {
     byId.set(it.id, it);
@@ -168,7 +175,8 @@ const src = (id) => srcById.get(id) || { id, name: id };
 //   popularity  - a small boost for widely viewed talks
 // minus a penalty for talks you already finished. The result is then diversified.
 let SEED = 0;
-try { SEED = parseInt(sessionStorage.getItem('edutube.seed'), 10) || 0; } catch { /* private mode */ }
+const IS_RELOAD = performance.getEntriesByType?.('navigation')?.[0]?.type === 'reload';
+try { if (!IS_RELOAD) SEED = parseInt(sessionStorage.getItem('edutube.seed'), 10) || 0; } catch { /* private mode */ }
 if (!SEED) reseed();
 
 function reseed() {
@@ -864,6 +872,66 @@ function renderSidebar() {
     Updated ${fmtDate(Date.parse(CAT.updated) / 1000)} • refreshed weekly<br>
     No account needed - your library stays on this device.</div>`;
 }
+
+// ---------------------------------------------------------------------------
+// Pull to refresh (Home): reshuffle the feed and pick up a newer weekly catalog
+// ---------------------------------------------------------------------------
+
+async function refreshFeed() {
+  reseed();
+  let fresh = false;
+  try {
+    const data = await fetchCatalog();
+    if (data.updated !== CAT.updated) {
+      await loadCatalog(data);
+      renderSidebar();
+      fresh = true;
+    }
+  } catch { /* offline: still reshuffle */ }
+  route();
+  toast(fresh ? 'New talks added' : 'Feed shuffled');
+}
+
+(function pullToRefresh() {
+  const ind = document.createElement('div');
+  ind.id = 'ptr';
+  ind.innerHTML = '<svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.96 7.96 0 0 0 12 4a8 8 0 1 0 7.73 10h-2.08A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4z"/></svg>';
+  document.body.appendChild(ind);
+  const THRESHOLD = 70;
+  let startY = null;
+  let pull = 0;
+  let busy = false;
+  const onHome = () => (parseHash().parts[0] || 'home') === 'home';
+  const show = (d) => {
+    ind.style.transform = `translate(-50%, ${Math.min(d, 110) - 50}px) rotate(${d * 3}deg)`;
+    ind.style.opacity = String(Math.min(1, d / THRESHOLD));
+    ind.classList.toggle('ready', d >= THRESHOLD);
+  };
+  window.addEventListener('touchstart', (e) => {
+    if (busy || !onHome() || window.scrollY > 0 || e.touches.length !== 1 || e.target.closest('.chips, .filters, .shelf-row')) { startY = null; return; }
+    startY = e.touches[0].clientY;
+    pull = 0;
+  }, { passive: true });
+  window.addEventListener('touchmove', (e) => {
+    if (startY === null) return;
+    pull = (e.touches[0].clientY - startY) * 0.55;
+    if (pull <= 0 || window.scrollY > 0) { show(0); return; }
+    ind.classList.remove('spin');
+    show(pull);
+  }, { passive: true });
+  window.addEventListener('touchend', async () => {
+    if (startY === null) return;
+    startY = null;
+    if (pull < THRESHOLD) { show(0); return; }
+    busy = true;
+    ind.classList.add('spin');
+    show(THRESHOLD);
+    await refreshFeed();
+    busy = false;
+    ind.classList.remove('spin');
+    show(0);
+  });
+})();
 
 // ---------------------------------------------------------------------------
 // Boot

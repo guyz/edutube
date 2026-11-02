@@ -424,3 +424,15 @@ h2.section { font-size: 20px; margin: 24px 0 12px; }
 .shuffle-btn { height: 32px; padding: 0 12px; border-radius: 8px; background: var(--bg-chip); display: inline-flex; align-items: center; gap: 6px; font-weight: 500; color: var(--fg); flex: none; }
 .shuffle-btn svg { width: 18px; height: 18px; }
 .shuffle-btn:hover { background: var(--bg-hover); }
+
+#ptr {
+  position: fixed; z-index: 60; left: 50%; top: calc(var(--topbar-h) + var(--safe-t) + 8px);
+  width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--bg-elev); color: var(--fg-2); box-shadow: var(--shadow);
+  transform: translate(-50%, -50px); opacity: 0; pointer-events: none;
+  transition: opacity .15s;
+}
+#ptr svg { width: 22px; height: 22px; }
+#ptr.ready { color: var(--accent-2); }
+#ptr.spin svg { animation: ptr-spin .8s linear infinite; }
+@keyframes ptr-spin { to { transform: rotate(360deg); } }

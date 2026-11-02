@@ -51,8 +51,9 @@ site/                   the static web app (no build step)
 The home feed ("For you (shuffled)") scores each talk by freshness, a random shuffle,
 your interests (topics and channels you have watched) and popularity. Talks you have
 finished are pushed down, and no channel can take more than 2 of any 8 slots in a row.
-The shuffle changes on every new visit and when you tap **Shuffle**, and stays stable
-while you browse. You can also sort by Newest, Most viewed, Longest or Oldest.
+The shuffle changes on every new visit, on reload, when you pull down at the top of
+Home, and when you tap **Shuffle**. It stays stable while you browse. Pulling down also
+picks up the newest weekly catalog. You can also sort by Newest, Most viewed, Longest or Oldest.
 
 ## Local development
 
