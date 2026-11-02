@@ -1,6 +1,6 @@
 {
  "catalog": {
-  "items": 7348,
+  "items": 7285,
   "per_source": {
    "3b1b": 11,
    "80k": 28,
@@ -16,7 +16,7 @@
    "axrp": 40,
    "berkeleyeecs": 45,
    "bkc": 80,
-   "blackhat": 46,
+   "blackhat": 45,
    "cais": 38,
    "cbmm": 278,
    "ccc": 8,
@@ -38,7 +38,7 @@
    "effectivealtruism": 9,
    "enigma": 250,
    "eurosp": 81,
-   "farai": 243,
+   "farai": 242,
    "flipod": 40,
    "foresight": 72,
    "gdmsafety": 17,
@@ -83,7 +83,7 @@
    "sfi": 42,
    "simons": 132,
    "stanford": 182,
-   "stanfordhai": 241,
+   "stanfordhai": 180,
    "transluce": 1,
    "ttic": 126,
    "twiml": 39,
@@ -94,11 +94,61 @@
    "yannic": 115
   }
  },
- "finished": 1793645260,
+ "finished": 1793645805,
  "sources": {
+  "3b1b": {
+   "errors": [],
+   "fetched": 81,
+   "new": 0
+  },
   "80k": {
    "errors": [],
    "fetched": 40,
+   "new": 0
+  },
+  "acs": {
+   "errors": [],
+   "fetched": 42,
+   "new": 0
+  },
+  "ai2": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
+  "aicoffeebreak": {
+   "errors": [],
+   "fetched": 68,
+   "new": 0
+  },
+  "aisafetytalks": {
+   "errors": [],
+   "fetched": 8,
+   "new": 0
+  },
+  "aitheory": {
+   "errors": [],
+   "fetched": 22,
+   "new": 0
+  },
+  "aivillage": {
+   "errors": [],
+   "fetched": 16,
+   "new": 0
+  },
+  "anthropic": {
+   "errors": [],
+   "fetched": 68,
+   "new": 0
+  },
+  "apart": {
+   "errors": [],
+   "fetched": 100,
+   "new": 0
+  },
+  "apollo": {
+   "errors": [],
+   "fetched": 14,
    "new": 0
   },
   "axrp": {
@@ -106,9 +156,94 @@
    "fetched": 40,
    "new": 0
   },
+  "berkeleyeecs": {
+   "errors": [],
+   "fetched": 120,
+   "new": 0
+  },
+  "bkc": {
+   "errors": [],
+   "fetched": 99,
+   "new": 0
+  },
+  "blackhat": {
+   "errors": [],
+   "fetched": 72,
+   "new": 0
+  },
+  "cais": {
+   "errors": [],
+   "fetched": 38,
+   "new": 0
+  },
+  "cbmm": {
+   "errors": [],
+   "fetched": 110,
+   "new": 0
+  },
+  "ccc": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
+  "cerias": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
+  "cisac": {
+   "errors": [],
+   "fetched": 62,
+   "new": 0
+  },
+  "cispa": {
+   "errors": [],
+   "fetched": 65,
+   "new": 0
+  },
+  "citp": {
+   "errors": [],
+   "fetched": 120,
+   "new": 0
+  },
+  "cmsa": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
+  "cmulti": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
   "cogrev": {
    "errors": [],
    "fetched": 40,
+   "new": 0
+  },
+  "coherelabs": {
+   "errors": [],
+   "fetched": 69,
+   "new": 0
+  },
+  "colm": {
+   "errors": [],
+   "fetched": 49,
+   "new": 0
+  },
+  "csail": {
+   "errors": [],
+   "fetched": 61,
+   "new": 0
+  },
+  "cset": {
+   "errors": [],
+   "fetched": 63,
+   "new": 0
+  },
+  "cylab": {
+   "errors": [],
+   "fetched": 63,
    "new": 0
   },
   "darknetdiaries": {
@@ -116,9 +251,34 @@
    "fetched": 40,
    "new": 0
   },
+  "defcon": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
   "dwarkesh": {
    "errors": [],
    "fetched": 40,
+   "new": 0
+  },
+  "effectivealtruism": {
+   "errors": [],
+   "fetched": 90,
+   "new": 0
+  },
+  "enigma": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
+  "eurosp": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
+  "farai": {
+   "errors": [],
+   "fetched": 60,
    "new": 0
   },
   "flipod": {
@@ -126,9 +286,59 @@
    "fetched": 40,
    "new": 0
   },
+  "foresight": {
+   "errors": [],
+   "fetched": 63,
+   "new": 0
+  },
+  "gdmsafety": {
+   "errors": [],
+   "fetched": 17,
+   "new": 0
+  },
+  "googletechtalks": {
+   "errors": [],
+   "fetched": 63,
+   "new": 0
+  },
+  "govai": {
+   "errors": [],
+   "fetched": 8,
+   "new": 0
+  },
+  "gpi": {
+   "errors": [],
+   "fetched": 37,
+   "new": 0
+  },
   "gradientpod": {
    "errors": [],
    "fetched": 40,
+   "new": 0
+  },
+  "hanlab": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
+  "iacr": {
+   "errors": [],
+   "fetched": 120,
+   "new": 0
+  },
+  "ias": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
+  "ieeesp": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
+  "ifml": {
+   "errors": [],
+   "fetched": 60,
    "new": 0
   },
   "insideview": {
@@ -141,9 +351,54 @@
    "fetched": 40,
    "new": 0
   },
+  "ipam": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
+  "karpathy": {
+   "errors": [],
+   "fetched": 17,
+   "new": 0
+  },
+  "kempner": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
   "latentspace": {
    "errors": [],
    "fetched": 40,
+   "new": 0
+  },
+  "mats": {
+   "errors": [],
+   "fetched": 28,
+   "new": 0
+  },
+  "mechinterp": {
+   "errors": [],
+   "fetched": 19,
+   "new": 0
+  },
+  "metr": {
+   "errors": [],
+   "fetched": 3,
+   "new": 0
+  },
+  "mila": {
+   "errors": [],
+   "fetched": 73,
+   "new": 0
+  },
+  "mitocw": {
+   "errors": [],
+   "fetched": 66,
+   "new": 0
+  },
+  "mlcollective": {
+   "errors": [],
+   "fetched": 62,
    "new": 0
   },
   "mlstpod": {
@@ -151,9 +406,54 @@
    "fetched": 40,
    "new": 0
   },
+  "mlsys": {
+   "errors": [],
+   "fetched": 93,
+   "new": 0
+  },
+  "mpiis": {
+   "errors": [],
+   "fetched": 64,
+   "new": 0
+  },
+  "msr": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
+  "ndss": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
+  "neelnanda": {
+   "errors": [],
+   "fetched": 49,
+   "new": 0
+  },
   "nopriors": {
    "errors": [],
    "fetched": 40,
+   "new": 0
+  },
+  "nyucds": {
+   "errors": [],
+   "fetched": 72,
+   "new": 0
+  },
+  "pets": {
+   "errors": [],
+   "fetched": 70,
+   "new": 0
+  },
+  "pli": {
+   "errors": [],
+   "fetched": 26,
+   "new": 0
+  },
+  "rdi": {
+   "errors": [],
+   "fetched": 120,
    "new": 0
   },
   "riskybiz": {
@@ -161,9 +461,24 @@
    "fetched": 40,
    "new": 0
   },
+  "robertmiles": {
+   "errors": [],
+   "fetched": 61,
+   "new": 0
+  },
+  "rwc": {
+   "errors": [],
+   "fetched": 63,
+   "new": 0
+  },
   "scalinglaws": {
    "errors": [],
    "fetched": 40,
+   "new": 0
+  },
+  "schwartzreisman": {
+   "errors": [],
+   "fetched": 61,
    "new": 0
   },
   "scw": {
@@ -171,11 +486,66 @@
    "fetched": 40,
    "new": 0
   },
+  "sfi": {
+   "errors": [],
+   "fetched": 120,
+   "new": 0
+  },
+  "simons": {
+   "errors": [],
+   "fetched": 120,
+   "new": 0
+  },
+  "stanford": {
+   "errors": [],
+   "fetched": 66,
+   "new": 0
+  },
+  "stanfordhai": {
+   "errors": [],
+   "fetched": 83,
+   "new": 0
+  },
+  "transluce": {
+   "errors": [],
+   "fetched": 1,
+   "new": 0
+  },
+  "ttic": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
   "twiml": {
    "errors": [],
    "fetched": 40,
    "new": 0
+  },
+  "usenix": {
+   "errors": [],
+   "fetched": 74,
+   "new": 0
+  },
+  "uwcse": {
+   "errors": [],
+   "fetched": 61,
+   "new": 0
+  },
+  "vector": {
+   "errors": [],
+   "fetched": 60,
+   "new": 0
+  },
+  "yalefds": {
+   "errors": [],
+   "fetched": 25,
+   "new": 0
+  },
+  "yannic": {
+   "errors": [],
+   "fetched": 75,
+   "new": 0
   }
  },
- "started": 1793645254
+ "started": 1793645782
 }
