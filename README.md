@@ -31,16 +31,28 @@ site/                   the static web app (no build step)
   native audio element, so they keep going in the background and show lock-screen
   controls. One player stays alive across pages, so you can browse while a talk keeps
   playing in the mini player.
-* **Your data.** Resume positions, Watch later, history and playback speed are kept in
-  this browser's localStorage.
+* **Your data.** Resume positions, Watch later and history are kept in this browser's
+  localStorage. Playback speed carries across videos until the app is fully closed, like
+  YouTube.
 
 ## Listening in the background on iPhone
 
-* **Podcasts:** these just work, with the screen off or in other apps.
-* **Talks, picture-in-picture:** tap the player's full-screen button, then tap the
-  picture-in-picture button, or swipe home while the video plays full screen.
-* **Talks, audio only:** if a talk pauses when you lock the phone or switch apps, press
-  ▶ on the Lock Screen or in Control Center and it keeps playing.
+* **Podcasts** play through a native audio element, so they keep playing with the screen
+  off or in other apps, with lock-screen controls.
+* **Talks** use YouTube's embedded player. On iPhone, that player turns off
+  picture-in-picture and background play for non-Premium viewers
+  (`disablePictureInPicture` in YouTube's own player code), and a website cannot override
+  that. Use **YouTube app** under a talk to continue at the same moment in the YouTube
+  app, where picture-in-picture works. For audio only, press ▶ on the Lock Screen after
+  switching apps.
+
+## Ranking
+
+The home feed ("For you (shuffled)") scores each talk by freshness, a random shuffle,
+your interests (topics and channels you have watched) and popularity. Talks you have
+finished are pushed down, and no channel can take more than 2 of any 8 slots in a row.
+The shuffle changes on every new visit and when you tap **Shuffle**, and stays stable
+while you browse. You can also sort by Newest, Most viewed, Longest or Oldest.
 
 ## Local development
 

@@ -35,6 +35,15 @@ export class Player {
     this.rate = 1;
     this._timer = null;
     this._lastPos = 0;
+    // YouTube silently resets the speed to 1x when a video loads, resumes or the app
+    // comes back from the background. Rate changes shortly after such a "disruption"
+    // are treated as resets and undone; other changes come from the user (YouTube's
+    // own settings menu) and become the new speed.
+    this._disruptAt = 0;
+    const disrupted = () => { this._disruptAt = Date.now(); if (!document.hidden) this._applyRate(); };
+    document.addEventListener('visibilitychange', disrupted);
+    window.addEventListener('pageshow', disrupted);
+    window.addEventListener('focus', disrupted);
     this._bindAudio();
     this._bindMediaSession();
   }
@@ -47,6 +56,7 @@ export class Player {
       return;
     }
     this.item = item;
+    this._disruptAt = Date.now();
     this.dock.hidden = false;
     this._setPlaying(false);
     if (item.type === 'podcast') {
@@ -110,8 +120,18 @@ export class Player {
 
   setRate(r) {
     this.rate = r;
-    if (this.kind === 'audio') this.audio.playbackRate = r;
-    else if (this.yt && this.yt.setPlaybackRate) this.yt.setPlaybackRate(r);
+    this._applyRate();
+  }
+
+  _applyRate() {
+    const r = this.rate;
+    if (this.kind === 'audio') {
+      if (this.audio.playbackRate !== r) this.audio.playbackRate = r;
+      this.audio.defaultPlaybackRate = r;
+    } else if (this.yt && this.yt.getPlaybackRate && this.yt.getPlaybackRate() !== r) {
+      const ok = this.yt.getAvailablePlaybackRates ? this.yt.getAvailablePlaybackRates() : [];
+      if (!ok.length || ok.includes(r)) this.yt.setPlaybackRate(r);
+    }
   }
 
   // ---- audio -----------------------------------------------------------------
@@ -119,6 +139,7 @@ export class Player {
   _loadAudio(item, start, autoplay) {
     const a = this.audio;
     a.src = item.audio;
+    a.defaultPlaybackRate = this.rate;
     a.playbackRate = this.rate;
     const seekStart = () => {
       a.removeEventListener('loadedmetadata', seekStart);
@@ -145,7 +166,7 @@ export class Player {
   _bindAudio() {
     const a = this.audio;
     const mine = (fn) => (e) => { if (this.kind === 'audio') fn(e); };
-    a.addEventListener('play', mine(() => { a.playbackRate = this.rate; this._setPlaying(true); }));
+    a.addEventListener('play', mine(() => { this._applyRate(); this._setPlaying(true); }));
     a.addEventListener('playing', mine(() => this._setPlaying(true)));
     a.addEventListener('pause', mine(() => { this._setPlaying(false); this._tick(); }));
     a.addEventListener('ended', mine(() => { this._setPlaying(false); this._tick(true); this.onEnded(this.item); }));
@@ -177,11 +198,17 @@ export class Player {
           },
           events: {
             onReady: () => {
-              if (this.rate !== 1) this.yt.setPlaybackRate(this.rate);
+              this._applyRate();
               resolve();
             },
             onStateChange: (e) => this._ytState(e.data),
-            onPlaybackRateChange: (e) => { this.rate = e.data; this.onState({ rate: e.data }); },
+            onPlaybackRateChange: (e) => {
+              const r = e.data;
+              if (r === this.rate || this.kind !== 'yt') return;
+              if (Date.now() - this._disruptAt < 3000) { this._applyRate(); return; }
+              this.rate = r;
+              this.onState({ rate: r });
+            },
             onError: (e) => {
               const msg = { 2: 'Invalid video id.', 5: 'This video cannot play in this browser.',
                 100: 'This video was removed or made private.', 101: 'The owner does not allow embedding - open it on YouTube.',
@@ -204,9 +231,10 @@ export class Player {
   _ytState(s) {
     // -1 unstarted, 0 ended, 1 playing, 2 paused, 3 buffering, 5 cued
     if (this.kind !== 'yt') return;
+    this._disruptAt = Date.now();
     if (s === 1) {
       this._setPlaying(true);
-      if (this.yt.getPlaybackRate && this.yt.getPlaybackRate() !== this.rate) this.yt.setPlaybackRate(this.rate);
+      this._applyRate();
       clearInterval(this._timer);
       this._timer = setInterval(() => this._tick(), 1000);
     } else if (s === 2 || s === 0 || s === 5 || s === -1) {
@@ -240,6 +268,7 @@ export class Player {
 
   _tick(ended = false) {
     if (!this.item) return;
+    if (this.playing) this._applyRate(); // catches silent resets that fire no event
     const t = this.time();
     const d = this.duration();
     this.onTime(this.item, t, d, ended);

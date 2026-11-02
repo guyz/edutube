@@ -420,3 +420,7 @@ h2.section { font-size: 20px; margin: 24px 0 12px; }
 }
 .watch-bar .pills { display: flex; flex-wrap: wrap; gap: 8px; }
 .help-box summary { cursor: pointer; }
+
+.shuffle-btn { height: 32px; padding: 0 12px; border-radius: 8px; background: var(--bg-chip); display: inline-flex; align-items: center; gap: 6px; font-weight: 500; color: var(--fg); flex: none; }
+.shuffle-btn svg { width: 18px; height: 18px; }
+.shuffle-btn:hover { background: var(--bg-hover); }

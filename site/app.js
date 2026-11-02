@@ -90,8 +90,23 @@ const state = {
   progress: store.get('progress', {}), // id -> {t, d, at, done}
   later: store.get('later', []),
   history: store.get('history', []),
-  prefs: Object.assign({ rate: 1, autoplay: false, theme: 'system' }, store.get('prefs', {})),
+  prefs: Object.assign({ autoplay: false, theme: 'system' }, store.get('prefs', {})),
+  // Playback speed is global across videos for this session, like YouTube.
+  rate: (() => { try { return parseFloat(sessionStorage.getItem('edutube.rate')) || 1; } catch { return 1; } })(),
 };
+
+const RATES = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
+
+function setRate(r, { fromPlayer = false } = {}) {
+  state.rate = r;
+  try { sessionStorage.setItem('edutube.rate', String(r)); } catch { /* private mode */ }
+  if (!fromPlayer) player.setRate(r);
+  const sel = document.getElementById('rate-sel');
+  if (sel) {
+    if (![...sel.options].some((o) => parseFloat(o.value) === r)) sel.add(new Option(`${r}×`, String(r)));
+    sel.value = String(r);
+  }
+}
 
 function saveProgress() { store.set('progress', state.progress); }
 function savePrefs() { store.set('prefs', state.prefs); }
@@ -145,6 +160,64 @@ async function loadCatalog() {
 }
 
 const src = (id) => srcById.get(id) || { id, name: id };
+
+// Default ("For you") ranking. Each item gets a score from:
+//   freshness   - newer talks score higher (halves roughly every 3.5 months)
+//   shuffle     - a random number that changes every app visit (or on "Shuffle")
+//   interests   - topics and channels you have watched before
+//   popularity  - a small boost for widely viewed talks
+// minus a penalty for talks you already finished. The result is then diversified.
+let SEED = 0;
+try { SEED = parseInt(sessionStorage.getItem('edutube.seed'), 10) || 0; } catch { /* private mode */ }
+if (!SEED) reseed();
+
+function reseed() {
+  SEED = (Math.random() * 2 ** 31) | 0 || 1;
+  try { sessionStorage.setItem('edutube.seed', String(SEED)); } catch { /* private mode */ }
+  return SEED;
+}
+
+function rand01(id) {
+  // Stable per (item, seed): the order doesn't jump around while you browse.
+  let h = SEED ^ 0x9e3779b9;
+  for (let i = 0; i < id.length; i++) h = Math.imul(h ^ id.charCodeAt(i), 0x85ebca6b);
+  h ^= h >>> 13; h = Math.imul(h, 0xc2b2ae35); h ^= h >>> 16;
+  return (h >>> 0) / 4294967296;
+}
+
+function interestProfile() {
+  const topics = new Map();
+  const sources = new Map();
+  const seen = [...new Set([...state.history.slice(0, 80), ...Object.keys(state.progress)])];
+  for (const id of seen) {
+    const it = byId.get(id);
+    if (!it) continue;
+    for (const t of it.topics || []) topics.set(t, (topics.get(t) || 0) + 1);
+    sources.set(it.src, (sources.get(it.src) || 0) + 1);
+  }
+  const tMax = Math.max(1, ...topics.values());
+  const sMax = Math.max(1, ...sources.values());
+  return { topics, sources, tMax, sMax, n: seen.length };
+}
+
+function recommend(list) {
+  const prof = interestProfile();
+  const now = NOW();
+  const scored = list.map((it) => {
+    const age = Math.max(0, (now - it.pub) / DAY);
+    const fresh = Math.exp(-age / 150);
+    let aff = 0;
+    if (prof.n) {
+      for (const t of it.topics || []) aff = Math.max(aff, (prof.topics.get(t) || 0) / prof.tMax);
+      aff = 0.7 * aff + 0.3 * ((prof.sources.get(it.src) || 0) / prof.sMax);
+    }
+    const pop = it.views ? Math.min(1, Math.log10(it.views + 1) / 5) : 0.3;
+    const done = state.progress[it.id]?.done ? 1.5 : 0;
+    return [1.0 * fresh + 1.0 * rand01(it.id) + 0.5 * aff + 0.2 * pop - done, it];
+  });
+  scored.sort((a, b) => b[0] - a[0]);
+  return diversify(scored.map((x) => x[1]));
+}
 
 // Keep the default feed varied: no source may fill more than 2 of any 8 consecutive slots.
 function diversify(list, maxRun = 2, windowSize = 8) {
@@ -374,19 +447,22 @@ function chipsHtml(base, q) {
     ${base === '' ? `<a class="chip" href="#/podcasts">${ICON.headphones.replace('<svg', '<svg style="width:18px;height:18px"')}Podcasts</a>` : ''}</div>`;
 }
 
-function filtersHtml(q, count, { sorts = true, relevance = false } = {}) {
+function filtersHtml(q, count, { sorts = true, relevance = false, shuffle = false } = {}) {
   const opt = (v, label, cur) => `<option value="${v}" ${cur === v ? 'selected' : ''}>${esc(label)}</option>`;
   const fmts = Object.entries(CAT.formats).filter(([k]) => k !== 'podcast');
   return `<div class="filters">
+    ${shuffle ? '<button class="shuffle-btn" data-shuffle aria-label="Shuffle the feed"><svg viewBox="0 0 24 24"><path d="M10.6 9.2 5.4 4 4 5.4l5.2 5.2zM14.5 4l2 2L4 18.6 5.4 20 18 7.5l2 2V4zm.3 9.4-1.4 1.4 3.1 3.1-2 2H20v-5.5l-2 2z"/></svg>Shuffle</button>' : ''}
     <select data-q="fmt" aria-label="Format">${opt('', 'All formats', q.fmt || '')}${fmts.map(([k, v]) => opt(k, v, q.fmt)).join('')}</select>
     <select data-q="len" aria-label="Length">${opt('', 'Any length', q.len || '')}${opt('short', 'Under 20 min', q.len)}${opt('medium', '20–60 min', q.len)}${opt('long', 'Over 1 hour', q.len)}</select>
     <select data-q="when" aria-label="Upload date">${opt('', 'Any time', q.when || '')}${opt('week', 'This week', q.when)}${opt('month', 'This month', q.when)}${opt('year', 'This year', q.when)}</select>
-    ${sorts ? `<select data-q="sort" aria-label="Sort">${relevance ? opt('', 'Relevance', q.sort || '') : opt('', 'Fresh & varied', q.sort || '')}${opt('newest', 'Newest', q.sort)}${opt('views', 'Most viewed', q.sort)}${opt('longest', 'Longest', q.sort)}${opt('oldest', 'Oldest', q.sort)}</select>` : ''}
+    ${sorts ? `<select data-q="sort" aria-label="Sort">${relevance ? opt('', 'Relevance', q.sort || '') : opt('', 'For you (shuffled)', q.sort || '')}${opt('newest', 'Newest', q.sort)}${opt('views', 'Most viewed', q.sort)}${opt('longest', 'Longest', q.sort)}${opt('oldest', 'Oldest', q.sort)}</select>` : ''}
     <span class="count">${count.toLocaleString()} result${count === 1 ? '' : 's'}</span>
   </div>`;
 }
 
 function bindFilters(base, q) {
+  const sh = view.querySelector('[data-shuffle]');
+  if (sh) sh.addEventListener('click', () => { reseed(); route(); });
   view.querySelectorAll('.filters select').forEach((sel) => {
     sel.addEventListener('change', () => {
       const next = { ...q, [sel.dataset.q]: sel.value };
@@ -399,8 +475,8 @@ function bindFilters(base, q) {
 function renderHome(q) {
   const filtered = !!(q.topic || q.fmt || q.len || q.when || q.sort);
   let list = applyFilters(VIDEOS, q);
-  list = q.sort ? sortList(list, q.sort) : diversify(sortList(list, 'newest'));
-  let html = chipsHtml('', q) + filtersHtml(q, list.length);
+  list = q.sort ? sortList(list, q.sort) : recommend(list);
+  let html = chipsHtml('', q) + filtersHtml(q, list.length, { shuffle: !q.sort });
 
   if (!filtered) {
     const cont = continueList().slice(0, 12);
@@ -522,9 +598,12 @@ function backgroundHelpHtml(open = false) {
   return `<details class="help-box" ${open ? 'open' : ''}><summary><b>Listening while you do other things (iPhone)</b></summary>
     <ol>
       <li><b>Podcasts</b> keep playing with the screen off or in other apps, with lock-screen controls.</li>
-      <li><b>Talks, picture-in-picture:</b> start the video, tap the full-screen button in the player, then tap the picture-in-picture button (or swipe home while it plays full screen). The video shrinks to a floating window.</li>
-      <li><b>Talks, audio only:</b> if a talk pauses when you lock the phone or switch apps, press ▶ on the Lock Screen or in Control Center and it will keep playing in the background.</li>
-      ${IS_STANDALONE ? '<li>Background playback is most reliable in <b>Safari</b> itself rather than the Home Screen app.</li>' : ''}
+      <li><b>Talks:</b> YouTube's player blocks the floating mini screen (picture-in-picture) and background play on
+        iPhone when a video is embedded in another site, unless you have Premium - this is in YouTube's own player code,
+        so no website can switch it off.</li>
+      <li><b>Mini screen:</b> tap <b>YouTube app</b> under the talk. It opens in the YouTube app at the same moment, where
+        picture-in-picture works.</li>
+      <li><b>Audio only:</b> if the talk pauses when you switch apps, press ▶ on the Lock Screen or in Control Center and it keeps playing.</li>
     </ol></details>`;
 }
 
@@ -561,7 +640,7 @@ function renderWatch(id, q) {
   const tags = [it.type === 'video' && CAT.formats[it.fmt] ? `<a href="${hrefWith('', { fmt: it.fmt, sort: 'newest' })}">#${esc(CAT.formats[it.fmt].replace(/\s+/g, ''))}</a>` : '',
     ...(it.topics || []).map((t) => `<a href="${hrefWith('', { topic: t })}">#${esc(CAT.topics[t].replace(/[\s&]+/g, ''))}</a>`)].join('');
   const extUrl = it.type === 'video' ? `https://www.youtube.com/watch?v=${it.id}` : (it.link || it.audio);
-  const rates = [0.75, 1, 1.25, 1.5, 1.75, 2];
+  const rates = RATES.includes(state.rate) ? RATES : [...RATES, state.rate].sort((a, b) => a - b);
   const date = it.approx ? ago(it.pub) : fmtDate(it.pub);
 
   upNext = related(it);
@@ -572,10 +651,10 @@ function renderWatch(id, q) {
         <div class="pills">
           <button class="pill" data-w="back" aria-label="Back 15 seconds">${ICON.back}15s</button>
           <button class="pill" data-w="fwd" aria-label="Forward 30 seconds">${ICON.fwd}30s</button>
-          <label class="pill">${ICON.speed}<select id="rate-sel" aria-label="Playback speed">${rates.map((r) => `<option value="${r}" ${state.prefs.rate === r ? 'selected' : ''}>${r}×</option>`).join('')}</select></label>
+          <label class="pill">${ICON.speed}<select id="rate-sel" aria-label="Playback speed">${rates.map((r) => `<option value="${r}" ${state.rate === r ? 'selected' : ''}>${r}×</option>`).join('')}</select></label>
           <button class="pill ${saved ? 'on' : ''}" data-w="later">${saved ? ICON.saved + 'Saved' : ICON.later + 'Save'}</button>
           <button class="pill" data-w="share">${ICON.share}Share</button>
-          <a class="pill" href="${esc(extUrl)}" target="_blank" rel="noopener" id="ext-link">${it.type === 'video' ? ICON.yt + 'YouTube' : ICON.link + 'Episode page'}</a>
+          <a class="pill" href="${esc(extUrl)}" target="_blank" rel="noopener" id="ext-link">${it.type === 'video' ? ICON.yt + (IS_IOS ? 'YouTube app' : 'YouTube') : ICON.link + 'Episode page'}</a>
         </div>
       </div>
       <div class="desc-box ${it.desc && it.desc.length > 220 ? 'clamped' : ''}">
@@ -614,11 +693,7 @@ function renderWatch(id, q) {
     box.classList.toggle('clamped');
     more.textContent = box.classList.contains('clamped') ? 'Show more' : 'Show less';
   });
-  $('#rate-sel').addEventListener('change', (e) => {
-    state.prefs.rate = parseFloat(e.target.value);
-    savePrefs();
-    player.setRate(state.prefs.rate);
-  });
+  $('#rate-sel').addEventListener('change', (e) => setRate(parseFloat(e.target.value)));
   $('#autoplay').addEventListener('change', (e) => { state.prefs.autoplay = e.target.checked; savePrefs(); });
   $('#ext-link').addEventListener('click', () => {
     if (it.type === 'video' && player.item?.id === it.id) {
@@ -633,7 +708,7 @@ function renderWatch(id, q) {
     const start = q.t ? parseInt(q.t, 10) : resumeAt(it);
     state.history = [id, ...state.history.filter((x) => x !== id)].slice(0, 300);
     store.set('history', state.history);
-    player.rate = state.prefs.rate;
+    player.rate = state.rate;
     player.load(it, { start, autoplay: true }).then(syncDock);
   }
   document.title = `${it.title} - EduTube`;
@@ -682,9 +757,12 @@ const player = new Player({
     const next = upNext.find((x) => !state.progress[x.id]?.done) || upNext[0];
     if (!next) return;
     if (currentRoute.startsWith('watch/')) location.hash = `#/watch/${next.id}`;
-    else { player.rate = state.prefs.rate; player.load(next, { start: resumeAt(next) }).then(syncDock); upNext = related(next); }
+    else { player.rate = state.rate; player.load(next, { start: resumeAt(next) }).then(syncDock); upNext = related(next); }
   },
-  onState() { saveProgress(); },
+  onState(ev) {
+    if (ev && ev.rate) setRate(ev.rate, { fromPlayer: true }); // changed in YouTube's own menu
+    saveProgress();
+  },
   onError(msg, it) {
     toast(msg);
     if (it && it.type === 'video') {
