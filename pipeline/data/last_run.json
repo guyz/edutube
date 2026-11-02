@@ -1,0 +1,181 @@
+{
+ "catalog": {
+  "items": 7348,
+  "per_source": {
+   "3b1b": 11,
+   "80k": 28,
+   "acs": 41,
+   "ai2": 100,
+   "aicoffeebreak": 117,
+   "aisafetytalks": 8,
+   "aitheory": 22,
+   "aivillage": 15,
+   "anthropic": 11,
+   "apart": 47,
+   "apollo": 8,
+   "axrp": 40,
+   "berkeleyeecs": 45,
+   "bkc": 80,
+   "blackhat": 46,
+   "cais": 38,
+   "cbmm": 278,
+   "ccc": 8,
+   "cerias": 247,
+   "cisac": 8,
+   "cispa": 28,
+   "citp": 101,
+   "cmsa": 39,
+   "cmulti": 94,
+   "cogrev": 30,
+   "coherelabs": 235,
+   "colm": 49,
+   "csail": 11,
+   "cset": 35,
+   "cylab": 207,
+   "darknetdiaries": 40,
+   "defcon": 24,
+   "dwarkesh": 40,
+   "effectivealtruism": 9,
+   "enigma": 250,
+   "eurosp": 81,
+   "farai": 243,
+   "flipod": 40,
+   "foresight": 72,
+   "gdmsafety": 17,
+   "googletechtalks": 116,
+   "govai": 8,
+   "gpi": 2,
+   "gradientpod": 40,
+   "hanlab": 172,
+   "iacr": 454,
+   "ias": 6,
+   "ieeesp": 249,
+   "ifml": 165,
+   "insideview": 40,
+   "interconnects": 38,
+   "ipam": 53,
+   "karpathy": 15,
+   "kempner": 68,
+   "latentspace": 37,
+   "mats": 27,
+   "mechinterp": 18,
+   "metr": 3,
+   "mila": 83,
+   "mitocw": 16,
+   "mlcollective": 71,
+   "mlstpod": 37,
+   "mlsys": 114,
+   "mpiis": 114,
+   "msr": 90,
+   "ndss": 234,
+   "neelnanda": 48,
+   "nopriors": 40,
+   "nyucds": 5,
+   "pets": 237,
+   "pli": 26,
+   "rdi": 148,
+   "riskybiz": 40,
+   "robertmiles": 43,
+   "rwc": 96,
+   "scalinglaws": 40,
+   "schwartzreisman": 207,
+   "scw": 40,
+   "sfi": 42,
+   "simons": 132,
+   "stanford": 182,
+   "stanfordhai": 241,
+   "transluce": 1,
+   "ttic": 126,
+   "twiml": 39,
+   "usenix": 181,
+   "uwcse": 111,
+   "vector": 70,
+   "yalefds": 25,
+   "yannic": 115
+  }
+ },
+ "finished": 1793645260,
+ "sources": {
+  "80k": {
+   "errors": [],
+   "fetched": 40,
+   "new": 0
+  },
+  "axrp": {
+   "errors": [],
+   "fetched": 40,
+   "new": 0
+  },
+  "cogrev": {
+   "errors": [],
+   "fetched": 40,
+   "new": 0
+  },
+  "darknetdiaries": {
+   "errors": [],
+   "fetched": 40,
+   "new": 0
+  },
+  "dwarkesh": {
+   "errors": [],
+   "fetched": 40,
+   "new": 0
+  },
+  "flipod": {
+   "errors": [],
+   "fetched": 40,
+   "new": 0
+  },
+  "gradientpod": {
+   "errors": [],
+   "fetched": 40,
+   "new": 0
+  },
+  "insideview": {
+   "errors": [],
+   "fetched": 40,
+   "new": 0
+  },
+  "interconnects": {
+   "errors": [],
+   "fetched": 40,
+   "new": 0
+  },
+  "latentspace": {
+   "errors": [],
+   "fetched": 40,
+   "new": 0
+  },
+  "mlstpod": {
+   "errors": [],
+   "fetched": 40,
+   "new": 0
+  },
+  "nopriors": {
+   "errors": [],
+   "fetched": 40,
+   "new": 0
+  },
+  "riskybiz": {
+   "errors": [],
+   "fetched": 40,
+   "new": 0
+  },
+  "scalinglaws": {
+   "errors": [],
+   "fetched": 40,
+   "new": 0
+  },
+  "scw": {
+   "errors": [],
+   "fetched": 40,
+   "new": 0
+  },
+  "twiml": {
+   "errors": [],
+   "fetched": 40,
+   "new": 0
+  }
+ },
+ "started": 1793645254
+}

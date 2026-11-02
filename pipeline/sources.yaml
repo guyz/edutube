@@ -1,0 +1,130 @@
+# EduTube sources.
+#
+# YouTube sources (type: youtube):
+#   id        short stable id (used in URLs and the catalog; don't rename)
+#   channel   YouTube channel id (UC...)
+#   filter    all    -> keep everything (after junk/short removal)
+#             ai     -> keep only AI/ML-related videos
+#             ai_sec -> keep AI/ML, security/privacy or cryptography videos
+#   trusted   true for academic venues: skips the "generic engineering" exclusion
+#   kind      default format: conference | workshop | seminar | lecture | tutorial | talk
+#   topics    topics always attached to this source's items
+#   include   regex; matching titles are kept even if the filter would drop them
+#   exclude   regex; matching titles are always dropped
+#   min_duration  seconds (default 240) - shorter videos are dropped
+#
+# Podcasts (type: podcast) are audio RSS feeds; they play in the background on iPhone.
+#   style  academic | casual   (casual = business / news / chatty)
+
+youtube:
+  # --- AI safety, alignment, interpretability ---------------------------------
+  - {id: farai, name: "FAR.AI (Alignment Workshops)", channel: UCCV6kbjBZje3LPxRp0NHfxg, filter: all, trusted: true, kind: workshop, topics: [safety], min_duration: 150}
+  - {id: aisafetytalks, name: "AI Safety Talks", channel: UCXowyqjXvFS-tMKF1GwhpkA, filter: all, trusted: true, kind: seminar, topics: [safety]}
+  - {id: gdmsafety, name: "Google DeepMind Safety Research", channel: UCrqYIvSGOKD1oYEpSGVpB-w, filter: all, trusted: true, kind: lecture, topics: [safety], min_duration: 120}
+  - {id: anthropic, name: "Anthropic", channel: UCrDwWp7EBBv4NwvScIpBDOA, filter: ai, kind: talk, topics: [safety],
+     include: "interpretab|alignment|safety|research|scheming|faking|welfare|societal|economic|policy|values|biology of|thinks|tracing|introspection|persona|reward hack|misalign|evaluat|sabotage|jailbreak",
+     exclude: "^(introducing|meet|announcing)|claude code|how to use|getting started|tips|customer|webinar|in action|on the job|walkthrough|demo\\b|keynote at|code with claude|developer|\\bapi\\b|enterprise|claude for|claude in|claude (opus|sonnet|haiku) \\d",
+     require_include: true}
+  - {id: neelnanda, name: "Neel Nanda (mech interp)", channel: UCBMJ0D-omcRay8dh4QT0doQ, filter: all, trusted: true, kind: tutorial, topics: [interp], min_duration: 600}
+  - {id: mechinterp, name: "Mechanistic Interpretability", channel: UC3WefVT6F4soruAwpH4cbcw, filter: all, trusted: true, kind: tutorial, topics: [interp], min_duration: 300}
+  - {id: transluce, name: "Transluce", channel: UCMy8F9jf7qXEIXkbQ6VOh-A, filter: all, trusted: true, kind: talk, topics: [interp]}
+  - {id: acs, name: "Alignment of Complex Systems", channel: UCJfJ4-x64S7GVAkZTIZON5A, filter: all, trusted: true, kind: talk, topics: [safety]}
+  - {id: cais, name: "Center for AI Safety", channel: UCY_K5gXsXHtuiP8mj3BiWxA, filter: all, trusted: true, kind: talk, topics: [safety]}
+  - {id: mats, name: "MATS Research", channel: UCnuF6PECZUanOv0Fr5bZncA, filter: all, trusted: true, kind: talk, topics: [safety], exclude: "how to move into|residency|apply|application|program overview"}
+  - {id: apollo, name: "Apollo Research", channel: UCtgPrSMysGMqA4W_KHDOQSA, filter: all, trusted: true, kind: talk, topics: [safety]}
+  - {id: metr, name: "METR", channel: UC2M-vHwEX5eQ0wFq5eB4E4A, filter: all, trusted: true, kind: talk, topics: [safety]}
+  - {id: apart, name: "Apart Research", channel: UCnfBOJnTkE9sgjMOOsQbi2w, filter: ai, kind: talk, topics: [safety], exclude: "award ceremony|hackathon (kick|launch|intro)|keynote.*hackathon|mastering|spotlight"}
+  - {id: robertmiles, name: "Robert Miles AI Safety", channel: UCLB7AzTwc6VFZrBsO2ucBMg, filter: all, trusted: true, kind: tutorial, topics: [safety], min_duration: 180}
+  - {id: govai, name: "Centre for the Governance of AI", channel: UCC7aDrlgl_81EfnE7Hg6kRw, filter: all, trusted: true, kind: seminar, topics: [policy]}
+  - {id: cset, name: "CSET Georgetown", channel: UCC0d3h9rVlfBouk0WoKE1FQ, filter: ai_sec, kind: talk, topics: [policy]}
+  - {id: foresight, name: "Foresight Institute", channel: UCg5UVUMqXeCQ03MelT_RXMg, filter: ai_sec, kind: seminar}
+  - {id: effectivealtruism, name: "EA Global talks", channel: UCEfASxwPxzsHlG5Rf1-4K9w, filter: ai, kind: talk}
+  - {id: gpi, name: "Global Priorities Institute (Oxford)", channel: UC_iZswakCKAw4HZw0UiB3Ig, filter: ai, trusted: true, kind: seminar, topics: [policy]}
+
+  # --- ML research institutes & seminars -----------------------------------------
+  - {id: simons, name: "Simons Institute", channel: UCW1C2xOfXsIzPgjXyuhkw9g, filter: ai_sec, trusted: true, kind: workshop, topics: [theory],
+     include: "learning|LLM|neural|alignment|interpretab|safety|privacy|crypto|security|transformer|reasoning|generaliz|language model|\\bAI\\b|agents?\\b|diffusion|sampling|statistic"}
+  - {id: ias, name: "Institute for Advanced Study", channel: UC8aRaZ6_0weiS50pvCmo0pw, filter: ai_sec, trusted: true, kind: seminar}
+  - {id: ipam, name: "IPAM (UCLA)", channel: UCGzuiiLdQZu9wxDNJHO_JnA, filter: ai_sec, trusted: true, kind: workshop}
+  - {id: cmsa, name: "Harvard CMSA", channel: UCBmPO-OK1sa8T1oX_9aVhAg, filter: ai_sec, trusted: true, kind: seminar}
+  - {id: kempner, name: "Kempner Institute (Harvard)", channel: UCAaeODsaNXMOBHBFx3m9rbQ, filter: all, trusted: true, kind: seminar}
+  - {id: aitheory, name: "AI Theory Seminar", channel: UCP4I0-vwykkcRxkHkABukPw, filter: all, trusted: true, kind: seminar, topics: [theory]}
+  - {id: ifml, name: "IFML (UT Austin)", channel: UChWzaONeq4lAnme1lJ5ASQg, filter: all, trusted: true, kind: seminar, topics: [theory]}
+  - {id: ttic, name: "TTIC", channel: UCt0xPdFngeYoHtzWQjF7YsQ, filter: all, trusted: true, kind: seminar, exclude: "ph\\.?d\\.? in|discover ttic|experience"}
+  # (TCS+ removed: its titles carry no topic, so it cannot be filtered to AI/security)
+  - {id: yalefds, name: "Yale Foundations of Data Science", channel: UCNiD2nu_KTY0yYr9LCnycQw, filter: all, trusted: true, kind: seminar, topics: [theory]}
+  - {id: cbmm, name: "MIT CBMM (Brains, Minds & Machines)", channel: UCGoxKRfTs0jQP52cfHCyyRQ, filter: all, trusted: true, kind: seminar, topics: [neuro]}
+  - {id: pli, name: "Princeton Language & Intelligence", channel: UCg5WgOsGFM42nql_OqcORRg, filter: all, trusted: true, kind: seminar, topics: [llm]}
+  - {id: cmulti, name: "CMU Language Technologies Institute", channel: UC-vyJqu5BOgi7pom98wvMdw, filter: all, trusted: true, kind: seminar, min_duration: 600}
+  - {id: mlsys, name: "Stanford MLSys Seminars", channel: UCzz6ructab1U44QPI3HpZEQ, filter: all, trusted: true, kind: seminar}
+  - {id: stanfordhai, name: "Stanford HAI", channel: UChugFTK0KyrES9terTid8vA, filter: ai_sec, kind: seminar}
+  - {id: stanford, name: "Stanford Online", channel: UCBa5G_ESCn8Yd4vw5U-gIcg, filter: ai_sec, kind: lecture,
+     include: "\\bCS ?(221|224\\w?|228|229\\w?|230|231\\w?|234|236|238|246|25|285|294|324|329\\w?|330|336|346|355|521|522|153)\\b|policy gradient|reinforcement|\\bAA ?(203|228|274\\w?)\\b",
+     exclude: "webinar|info(rmation)? session|certificate|program overview|leadership|career|product management|for business|business opportunit|executive|admissions|graduate program|meet the|student story|alumni|marketing|sustainab|healthcare innovation|design thinking|ios development|swiftui|\\bCS ?(193|106|107|110|142|144)"}
+  - {id: mitocw, name: "MIT OpenCourseWare", channel: UCEBb1b_L6zDS3xTUrIALZOw, filter: ai_sec, trusted: true, kind: lecture, exclude: "photograph|startup|sunflower"}
+  - {id: rdi, name: "Berkeley RDI (LLM Agents courses)", channel: UCB67PxhB5LAWEbI4etQS7aw, filter: ai_sec, kind: lecture,
+     exclude: "blockchain|web3|defi|crypto(currency)? |token|decentraliz|summit recap|hackathon|founder|startup|pitch|demo day|workshop:|\\bmcp\\b|vllm|pydantic|enterprise|ai-native|\\bstage\\b|sessions?\\b|remarks|sponsor|venture|investor"}
+  - {id: schwartzreisman, name: "Schwartz Reisman Institute (Toronto)", channel: UCSq8_q4SCU3rYFwnA2bDxyQ, filter: all, trusted: true, kind: seminar, topics: [policy]}
+  - {id: bkc, name: "Berkman Klein Center (Harvard)", channel: UCuLGmD72gJDBwmLw06X58SA, filter: ai_sec, trusted: true, kind: seminar, topics: [policy]}
+  - {id: citp, name: "Princeton CITP", channel: UCo5ZTsv8ZADpgnJIPtw-f-g, filter: ai_sec, trusted: true, kind: seminar}
+  - {id: sfi, name: "Santa Fe Institute", channel: UC9rHXgUE9pikzYcGrAujMXQ, filter: ai, trusted: true, kind: seminar}
+  - {id: vector, name: "Vector Institute", channel: UCFCbqKIQ-8mca0zmMVziAfg, filter: ai, kind: talk, min_duration: 900, exclude: "career fair|getting hired|event recap|industry leaders|sovereignty|intern talks|applied projects|assignment \\d|project talk"}
+  - {id: mila, name: "Mila", channel: UCZK_i8QwWQ7w6V0H12PFpWA, filter: ai, kind: seminar, min_duration: 600}
+  - {id: mpiis, name: "Max Planck Institute for Intelligent Systems", channel: UCty-pPOWlWUk4gXNm5pydcg, filter: ai, trusted: true, kind: talk, include: "MLSS|machine learning summer school"}
+  - {id: nyucds, name: "NYU Center for Data Science", channel: UCjxoi1kA0twXJsVnIq2vMHA, filter: ai, kind: seminar}
+  - {id: uwcse, name: "UW Paul G. Allen School", channel: UCfSiYryINctnCaKe-jilVeA, filter: ai_sec, trusted: true, kind: seminar, include: "robotics colloquium|IFDS|optimization and data|NLP seminar|ML seminar"}
+  - {id: berkeleyeecs, name: "UC Berkeley EECS", channel: UCYN8R_LpgxCkeVTO_YdVJoA, filter: ai_sec, trusted: true, kind: seminar}
+  - {id: csail, name: "MIT CSAIL", channel: UCBpxspUNl1Th33XbugiHJzw, filter: ai_sec, trusted: true, kind: seminar, min_duration: 900}
+  - {id: hanlab, name: "MIT HAN Lab (Efficient ML)", channel: UCcA-9WYwGaUrWiZaEDo84ng, filter: all, trusted: true, kind: lecture, topics: [llm]}
+  - {id: colm, name: "COLM (Conference on Language Modeling)", channel: UCr4S7b9E82ZGVixVrvC5YjQ, filter: all, trusted: true, kind: conference, topics: [llm]}
+  - {id: mlcollective, name: "ML Collective (DLCT)", channel: UCp3a0vIbwtVGtMVIfIsKvCQ, filter: all, trusted: true, kind: seminar, exclude: "fundrais"}
+  - {id: coherelabs, name: "Cohere Labs (research talks)", channel: UCAKTUy0tz47ZY02DFpxMqoQ, filter: all, kind: seminar, min_duration: 600,
+     exclude: "announces|fundrais|series [a-f]\\b|\\bnorth\\b|command [ar]\\b|rerank|embed \\d|cohere (toolkit|platform|on|for)|webinar|customer|chief|\\bceo\\b|shares (her|his)|partnership|launch"}
+  - {id: ai2, name: "Ai2 (Allen Institute for AI)", channel: UCEqgmyWChwvt6MFGGlmUQCQ, filter: ai, kind: talk, min_duration: 600}
+  - {id: msr, name: "Microsoft Research", channel: UCCb9_Kn8F_Opb3UCGm-lILQ, filter: ai_sec, kind: talk, min_duration: 600, exclude: "podcast|abstracts:|in 60 seconds|careers|life at|\\bfellowship\\b|internship|episode \\d"}
+  - {id: googletechtalks, name: "Google TechTalks", channel: UCtXKDgv1AVoG88PLl8nGXmw, filter: ai_sec, kind: talk}
+
+  # --- Tutorials & explainers (research-level, not generic engineering) -----------
+  - {id: karpathy, name: "Andrej Karpathy", channel: UCXUPKJO5MZQN11PqgIvyuvQ, filter: all, trusted: true, kind: tutorial, topics: [llm]}
+  - {id: aicoffeebreak, name: "AI Coffee Break with Letitia", channel: UCobqgqE4i5Kf7wrxRxhToQA, filter: all, trusted: true, kind: tutorial}
+  - {id: yannic, name: "Yannic Kilcher (paper reviews)", channel: UCZHmQk67mSJgfCCTn7xBfew, filter: ai, trusted: true, kind: tutorial, exclude: "ml news|\\bnews\\b|giveaway|merch|biggest week|week in ai"}
+  - {id: 3b1b, name: "3Blue1Brown", channel: UCYO_jab_esuFRV4b17AJtAw, filter: ai, trusted: true, kind: tutorial, include: "neural network|transformer|gpt|attention|backprop|gradient descent|llm|deep learning|diffusion"}
+
+  # --- Security, privacy & cryptography venues -----------------------------------
+  - {id: usenix, name: "USENIX", channel: UC4-GrpQBx6WCGwmwozP744Q, filter: ai_sec, trusted: true, kind: conference, topics: [],
+     include: "usenix security|\\bsec '|enigma|soups|pepr|woot|\\bcset\\b|foci|scainet|ai security|llm"}
+  - {id: enigma, name: "USENIX Enigma", channel: UCIdV7bE97mSPTH1mOi_yUrw, filter: all, trusted: true, kind: conference, topics: [security]}
+  - {id: ieeesp, name: "IEEE Symposium on Security and Privacy", channel: UC6pXMS7qre9GZW7A7FVM90Q, filter: all, trusted: true, kind: conference, topics: [security]}
+  - {id: eurosp, name: "IEEE EuroS&P", channel: UCGnPU4Mf3k_vmX-0GCx9GNA, filter: all, trusted: true, kind: conference, topics: [security]}
+  - {id: ndss, name: "NDSS Symposium", channel: UCL2H6Z8JNydJgOjbmfu7JFg, filter: all, trusted: true, kind: conference, topics: [security]}
+  - {id: pets, name: "Privacy Enhancing Technologies Symposium", channel: UC-m6oi7a-8LffTk64J3tq-w, filter: all, trusted: true, kind: conference, topics: [security]}
+  - {id: iacr, name: "IACR (Crypto, Eurocrypt, ...)", channel: UCV-WittrGkRyONzX6UmCaiA, filter: all, trusted: true, kind: conference, topics: [crypto]}
+  - {id: rwc, name: "Real World Crypto", channel: UCQiIRDBmp3pfTdRJ99EeDEw, filter: all, trusted: true, kind: conference, topics: [crypto]}
+  - {id: cylab, name: "CMU CyLab", channel: UCPu6fkRBvO4ukLDVSrCz8rA, filter: all, trusted: true, kind: seminar, topics: [security]}
+  - {id: cerias, name: "Purdue CERIAS Security Seminar", channel: UC5WUuzSlyRDuZnRfIrduFnQ, filter: all, trusted: true, kind: seminar, topics: [security]}
+  - {id: cispa, name: "CISPA Helmholtz Center", channel: UCaIJ19nyqOkGyw55NIQH-MA, filter: ai_sec, trusted: true, kind: talk, topics: [security], exclude: "studiengang|videovortrag|faces of cispa|hackathon"}
+  - {id: cisac, name: "Stanford CISAC", channel: UCSso8D5UG2BJ5_zLTDHMjLQ, filter: ai, kind: seminar, topics: [policy]}
+  - {id: aivillage, name: "DEF CON AI Village", channel: UCBUw0vVET-kB7LPj_XsNQ9Q, filter: all, kind: conference, topics: [security], exclude: "announcement"}
+  - {id: defcon, name: "DEF CON (AI talks only)", channel: UC6Om9kAkl32dWlDSNlDS9Iw, filter: ai, kind: conference, topics: [security]}
+  - {id: blackhat, name: "Black Hat (AI talks only)", channel: UCJ6q9Ie29ajGqKApbLqfBOg, filter: ai, kind: conference, topics: [security], exclude: "sponsored|vendor|booth|interview with .* ceo"}
+  - {id: ccc, name: "Chaos Computer Club (AI talks only)", channel: UC2TXq_t06Hjdr2g_KdKpHQg, filter: ai, kind: conference, topics: [security]}
+
+podcasts:
+  # Academic-leaning interviews
+  - {id: axrp, name: "AXRP – AI X-risk Research Podcast", feed: "https://rss.libsyn.com/shows/312947/destinations/2517215.xml", style: academic, topics: [safety]}
+  - {id: mlstpod, name: "Machine Learning Street Talk", feed: "https://anchor.fm/s/1e4a0eac/podcast/rss", style: academic}
+  - {id: gradientpod, name: "The Gradient: Perspectives on AI", feed: "https://api.substack.com/feed/podcast/265424/s/1354.rss", style: academic}
+  - {id: twiml, name: "The TWIML AI Podcast", feed: "https://feeds.megaphone.fm/MLN2155636147", style: academic}
+  - {id: flipod, name: "Future of Life Institute Podcast", feed: "https://feeds.transistor.fm/future-of-life-institute-podcast-4e4d1fa5-a878-4cb2-91be-91c3ce266dfd", style: academic, topics: [safety]}
+  - {id: 80k, name: "80,000 Hours Podcast", feed: "https://feeds.transistor.fm/80000-hours-podcast", style: academic, filter: ai}
+  - {id: insideview, name: "The Inside View", feed: "https://anchor.fm/s/56df2194/podcast/rss", style: academic, topics: [safety]}
+  - {id: scalinglaws, name: "Scaling Laws (Lawfare)", feed: "https://feeds.acast.com/public/shows/61e878a1419a9b0013b27134", style: academic, topics: [policy]}
+  - {id: scw, name: "Security Cryptography Whatever", feed: "https://rss.buzzsprout.com/1822302.rss", style: academic, topics: [security]}
+  # Business / casual
+  - {id: dwarkesh, name: "Dwarkesh Podcast", feed: "https://apple.dwarkesh-podcast.workers.dev/feed.rss", style: casual}
+  - {id: cogrev, name: "The Cognitive Revolution", feed: "https://feeds.megaphone.fm/RINTP3108857801", style: casual}
+  - {id: interconnects, name: "Interconnects (Nathan Lambert)", feed: "https://api.substack.com/feed/podcast/48206.rss", style: casual}
+  - {id: nopriors, name: "No Priors", feed: "https://feeds.megaphone.fm/nopriors", style: casual}
+  - {id: latentspace, name: "Latent Space", feed: "https://podcast.latent.space/feed.xml", style: casual}
+  - {id: riskybiz, name: "Risky Business", feed: "https://risky.biz/feeds/risky-business/", style: casual, topics: [security]}
+  - {id: darknetdiaries, name: "Darknet Diaries", feed: "https://podcast.darknetdiaries.com", style: casual, topics: [security]}
