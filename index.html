@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>EduTube</title>
+  <meta name="description" content="Academic talks on AI, safety and security - conferences, seminars, invited talks and tutorials, updated weekly.">
+  <meta name="theme-color" content="#0f0f0f" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="EduTube">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="preconnect" href="https://i.ytimg.com">
+  <link rel="preconnect" href="https://www.youtube-nocookie.com">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header id="topbar">
+    <button class="icon-btn only-desktop" id="menu-btn" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg></button>
+    <a href="#/" class="logo" aria-label="EduTube home">
+      <svg viewBox="0 0 32 24" class="logo-mark"><rect width="32" height="24" rx="6"/><path d="M13 7v10l8-5z" fill="#fff"/></svg>
+      <span>Edu<b>Tube</b></span>
+    </a>
+    <form id="search-form" role="search" autocomplete="off">
+      <input id="search" type="search" placeholder="Search talks, speakers, venues…" aria-label="Search" enterkeyhint="search">
+      <button type="submit" aria-label="Search"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 14 15.5l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg></button>
+    </form>
+    <button class="icon-btn only-mobile" id="search-open" aria-label="Search"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 14 15.5l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg></button>
+  </header>
+
+  <nav id="sidebar" aria-label="Main">
+    <div class="nav-group">
+      <a href="#/" data-nav="home"><svg viewBox="0 0 24 24"><path d="M12 3 3 10v11h6v-7h6v7h6V10z"/></svg><span>Home</span></a>
+      <a href="#/podcasts" data-nav="podcasts"><svg viewBox="0 0 24 24"><path d="M12 1a9 9 0 0 0-9 9v7a3 3 0 0 0 3 3h3v-8H5v-2a7 7 0 0 1 14 0v2h-4v8h3a3 3 0 0 0 3-3v-7a9 9 0 0 0-9-9z"/></svg><span>Podcasts</span></a>
+      <a href="#/explore" data-nav="explore"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm2.2 12.2L7 17l2.8-7.2L17 7z"/></svg><span>Explore</span></a>
+      <a href="#/library" data-nav="library"><svg viewBox="0 0 24 24"><path d="M4 6H2v14a2 2 0 0 0 2 2h14v-2H4zm16-4H8a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-8 12.5v-9l6 4.5z"/></svg><span>Library</span></a>
+    </div>
+    <div class="nav-group" id="nav-topics"></div>
+    <div class="nav-group" id="nav-foot"></div>
+  </nav>
+
+  <main id="main">
+    <section id="dock" aria-label="Player" hidden>
+      <div class="dock-media">
+        <div id="yt-wrap"><div id="yt-player"></div></div>
+        <div id="pod-stage" hidden>
+          <div class="pod-bg"></div>
+          <img class="pod-art" alt="">
+          <div class="pod-controls">
+            <div class="seek"><span class="t-cur">0:00</span><input type="range" class="seek-bar" min="0" max="1000" value="0" aria-label="Seek"><span class="t-dur">0:00</span></div>
+            <div class="pod-buttons">
+              <button class="rnd" data-act="back" aria-label="Back 15 seconds"><svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7a6 6 0 1 1-6 6H4a8 8 0 1 0 8-8z"/><text x="12" y="16.5" text-anchor="middle" font-size="7" font-weight="700">15</text></svg></button>
+              <button class="rnd big" data-act="toggle" aria-label="Play/Pause"><svg class="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="i-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg></button>
+              <button class="rnd" data-act="fwd" aria-label="Forward 30 seconds"><svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7a6 6 0 1 0 6 6h2a8 8 0 1 1-8-8z"/><text x="12" y="16.5" text-anchor="middle" font-size="7" font-weight="700">30</text></svg></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mini-bar">
+        <div class="mini-progress"><i></i></div>
+        <button class="mini-info" data-act="expand" aria-label="Open player">
+          <span class="mini-title"></span>
+          <span class="mini-sub"></span>
+        </button>
+        <button class="icon-btn" data-act="toggle" aria-label="Play/Pause"><svg class="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><svg class="i-pause" viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg></button>
+        <button class="icon-btn" data-act="close" aria-label="Close player"><svg viewBox="0 0 24 24"><path d="M19 6.4 17.6 5 12 10.6 6.4 5 5 6.4l5.6 5.6L5 17.6 6.4 19l5.6-5.6 5.6 5.6 1.4-1.4-5.6-5.6z"/></svg></button>
+      </div>
+    </section>
+    <div id="view"></div>
+  </main>
+
+  <nav id="bottomnav" aria-label="Main">
+    <a href="#/" data-nav="home"><svg viewBox="0 0 24 24"><path d="M12 3 3 10v11h6v-7h6v7h6V10z"/></svg><span>Home</span></a>
+    <a href="#/podcasts" data-nav="podcasts"><svg viewBox="0 0 24 24"><path d="M12 1a9 9 0 0 0-9 9v7a3 3 0 0 0 3 3h3v-8H5v-2a7 7 0 0 1 14 0v2h-4v8h3a3 3 0 0 0 3-3v-7a9 9 0 0 0-9-9z"/></svg><span>Podcasts</span></a>
+    <a href="#/explore" data-nav="explore"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm2.2 12.2L7 17l2.8-7.2L17 7z"/></svg><span>Explore</span></a>
+    <a href="#/library" data-nav="library"><svg viewBox="0 0 24 24"><path d="M4 6H2v14a2 2 0 0 0 2 2h14v-2H4zm16-4H8a2 2 0 0 0-2 2v12c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-8 12.5v-9l6 4.5z"/></svg><span>Library</span></a>
+  </nav>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <audio id="audio" preload="metadata" playsinline></audio>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
