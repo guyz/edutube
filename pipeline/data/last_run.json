@@ -1,9 +1,9 @@
 {
  "catalog": {
-  "items": 7285,
+  "items": 7368,
   "per_source": {
    "3b1b": 11,
-   "80k": 28,
+   "80k": 31,
    "acs": 41,
    "ai2": 100,
    "aicoffeebreak": 117,
@@ -14,31 +14,31 @@
    "apart": 47,
    "apollo": 8,
    "axrp": 40,
-   "berkeleyeecs": 45,
-   "bkc": 80,
-   "blackhat": 45,
+   "berkeleyeecs": 46,
+   "bkc": 81,
+   "blackhat": 48,
    "cais": 38,
    "cbmm": 278,
    "ccc": 8,
-   "cerias": 247,
+   "cerias": 248,
    "cisac": 8,
    "cispa": 28,
-   "citp": 101,
-   "cmsa": 39,
+   "citp": 102,
+   "cmsa": 41,
    "cmulti": 94,
-   "cogrev": 30,
+   "cogrev": 31,
    "coherelabs": 235,
    "colm": 49,
    "csail": 11,
    "cset": 35,
-   "cylab": 207,
-   "darknetdiaries": 40,
-   "defcon": 24,
+   "cylab": 208,
+   "darknetdiaries": 41,
+   "defcon": 39,
    "dwarkesh": 40,
    "effectivealtruism": 9,
    "enigma": 250,
    "eurosp": 81,
-   "farai": 242,
+   "farai": 245,
    "flipod": 40,
    "foresight": 72,
    "gdmsafety": 17,
@@ -46,18 +46,18 @@
    "govai": 8,
    "gpi": 2,
    "gradientpod": 40,
-   "hanlab": 172,
-   "iacr": 454,
+   "hanlab": 176,
+   "iacr": 455,
    "ias": 6,
    "ieeesp": 249,
-   "ifml": 165,
+   "ifml": 166,
    "insideview": 40,
    "interconnects": 38,
    "ipam": 53,
    "karpathy": 15,
    "kempner": 68,
-   "latentspace": 37,
-   "mats": 27,
+   "latentspace": 42,
+   "mats": 28,
    "mechinterp": 18,
    "metr": 3,
    "mila": 83,
@@ -66,35 +66,35 @@
    "mlstpod": 37,
    "mlsys": 114,
    "mpiis": 114,
-   "msr": 90,
+   "msr": 92,
    "ndss": 234,
    "neelnanda": 48,
-   "nopriors": 40,
+   "nopriors": 41,
    "nyucds": 5,
    "pets": 237,
    "pli": 26,
    "rdi": 148,
-   "riskybiz": 40,
+   "riskybiz": 42,
    "robertmiles": 43,
    "rwc": 96,
-   "scalinglaws": 40,
+   "scalinglaws": 41,
    "schwartzreisman": 207,
    "scw": 40,
    "sfi": 42,
    "simons": 132,
-   "stanford": 182,
-   "stanfordhai": 180,
+   "stanford": 188,
+   "stanfordhai": 189,
    "transluce": 1,
    "ttic": 126,
-   "twiml": 39,
-   "usenix": 181,
-   "uwcse": 111,
+   "twiml": 40,
+   "usenix": 202,
+   "uwcse": 113,
    "vector": 70,
    "yalefds": 25,
    "yannic": 115
   }
  },
- "finished": 1793645805,
+ "finished": 1794232831,
  "sources": {
   "3b1b": {
    "errors": [],
@@ -104,7 +104,7 @@
   "80k": {
    "errors": [],
    "fetched": 40,
-   "new": 0
+   "new": 3
   },
   "acs": {
    "errors": [],
@@ -114,7 +114,7 @@
   "ai2": {
    "errors": [],
    "fetched": 60,
-   "new": 0
+   "new": 1
   },
   "aicoffeebreak": {
    "errors": [],
@@ -159,17 +159,17 @@
   "berkeleyeecs": {
    "errors": [],
    "fetched": 120,
-   "new": 0
+   "new": 1
   },
   "bkc": {
    "errors": [],
-   "fetched": 99,
-   "new": 0
+   "fetched": 98,
+   "new": 3
   },
   "blackhat": {
    "errors": [],
-   "fetched": 72,
-   "new": 0
+   "fetched": 68,
+   "new": 7
   },
   "cais": {
    "errors": [],
@@ -184,17 +184,17 @@
   "ccc": {
    "errors": [],
    "fetched": 60,
-   "new": 0
+   "new": 7
   },
   "cerias": {
    "errors": [],
    "fetched": 60,
-   "new": 0
+   "new": 2
   },
   "cisac": {
    "errors": [],
    "fetched": 62,
-   "new": 0
+   "new": 1
   },
   "cispa": {
    "errors": [],
@@ -204,12 +204,12 @@
   "citp": {
    "errors": [],
    "fetched": 120,
-   "new": 0
+   "new": 1
   },
   "cmsa": {
    "errors": [],
    "fetched": 60,
-   "new": 0
+   "new": 4
   },
   "cmulti": {
    "errors": [],
@@ -219,7 +219,7 @@
   "cogrev": {
    "errors": [],
    "fetched": 40,
-   "new": 0
+   "new": 2
   },
   "coherelabs": {
    "errors": [],
@@ -244,17 +244,17 @@
   "cylab": {
    "errors": [],
    "fetched": 63,
-   "new": 0
+   "new": 1
   },
   "darknetdiaries": {
    "errors": [],
    "fetched": 40,
-   "new": 0
+   "new": 1
   },
   "defcon": {
    "errors": [],
    "fetched": 60,
-   "new": 0
+   "new": 60
   },
   "dwarkesh": {
    "errors": [],
@@ -279,7 +279,7 @@
   "farai": {
    "errors": [],
    "fetched": 60,
-   "new": 0
+   "new": 3
   },
   "flipod": {
    "errors": [],
@@ -318,18 +318,18 @@
   },
   "hanlab": {
    "errors": [],
-   "fetched": 60,
-   "new": 0
+   "fetched": 62,
+   "new": 4
   },
   "iacr": {
    "errors": [],
    "fetched": 120,
-   "new": 0
+   "new": 1
   },
   "ias": {
    "errors": [],
    "fetched": 60,
-   "new": 0
+   "new": 18
   },
   "ieeesp": {
    "errors": [],
@@ -339,7 +339,7 @@
   "ifml": {
    "errors": [],
    "fetched": 60,
-   "new": 0
+   "new": 1
   },
   "insideview": {
    "errors": [],
@@ -369,12 +369,12 @@
   "latentspace": {
    "errors": [],
    "fetched": 40,
-   "new": 0
+   "new": 6
   },
   "mats": {
    "errors": [],
-   "fetched": 28,
-   "new": 0
+   "fetched": 29,
+   "new": 1
   },
   "mechinterp": {
    "errors": [],
@@ -419,7 +419,7 @@
   "msr": {
    "errors": [],
    "fetched": 60,
-   "new": 0
+   "new": 2
   },
   "ndss": {
    "errors": [],
@@ -434,12 +434,12 @@
   "nopriors": {
    "errors": [],
    "fetched": 40,
-   "new": 0
+   "new": 1
   },
   "nyucds": {
    "errors": [],
    "fetched": 72,
-   "new": 0
+   "new": 1
   },
   "pets": {
    "errors": [],
@@ -459,7 +459,7 @@
   "riskybiz": {
    "errors": [],
    "fetched": 40,
-   "new": 0
+   "new": 2
   },
   "robertmiles": {
    "errors": [],
@@ -474,7 +474,7 @@
   "scalinglaws": {
    "errors": [],
    "fetched": 40,
-   "new": 0
+   "new": 1
   },
   "schwartzreisman": {
    "errors": [],
@@ -494,17 +494,17 @@
   "simons": {
    "errors": [],
    "fetched": 120,
-   "new": 0
+   "new": 10
   },
   "stanford": {
    "errors": [],
-   "fetched": 66,
-   "new": 0
+   "fetched": 65,
+   "new": 6
   },
   "stanfordhai": {
    "errors": [],
    "fetched": 83,
-   "new": 0
+   "new": 11
   },
   "transluce": {
    "errors": [],
@@ -519,17 +519,17 @@
   "twiml": {
    "errors": [],
    "fetched": 40,
-   "new": 0
+   "new": 1
   },
   "usenix": {
    "errors": [],
    "fetched": 74,
-   "new": 0
+   "new": 60
   },
   "uwcse": {
    "errors": [],
-   "fetched": 61,
-   "new": 0
+   "fetched": 62,
+   "new": 4
   },
   "vector": {
    "errors": [],
@@ -547,5 +547,5 @@
    "new": 0
   }
  },
- "started": 1793645782
+ "started": 1794232806
 }
