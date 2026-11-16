@@ -1,9 +1,9 @@
 {
  "catalog": {
-  "items": 7368,
+  "items": 7427,
   "per_source": {
    "3b1b": 11,
-   "80k": 31,
+   "80k": 33,
    "acs": 41,
    "ai2": 100,
    "aicoffeebreak": 117,
@@ -16,85 +16,85 @@
    "axrp": 40,
    "berkeleyeecs": 46,
    "bkc": 81,
-   "blackhat": 48,
+   "blackhat": 50,
    "cais": 38,
    "cbmm": 278,
    "ccc": 8,
-   "cerias": 248,
+   "cerias": 249,
    "cisac": 8,
    "cispa": 28,
    "citp": 102,
    "cmsa": 41,
    "cmulti": 94,
-   "cogrev": 31,
-   "coherelabs": 235,
+   "cogrev": 33,
+   "coherelabs": 241,
    "colm": 49,
    "csail": 11,
    "cset": 35,
    "cylab": 208,
    "darknetdiaries": 41,
    "defcon": 39,
-   "dwarkesh": 40,
+   "dwarkesh": 41,
    "effectivealtruism": 9,
    "enigma": 250,
    "eurosp": 81,
    "farai": 245,
-   "flipod": 40,
-   "foresight": 72,
+   "flipod": 41,
+   "foresight": 73,
    "gdmsafety": 17,
    "googletechtalks": 116,
    "govai": 8,
    "gpi": 2,
    "gradientpod": 40,
-   "hanlab": 176,
-   "iacr": 455,
+   "hanlab": 178,
+   "iacr": 469,
    "ias": 6,
    "ieeesp": 249,
-   "ifml": 166,
+   "ifml": 176,
    "insideview": 40,
-   "interconnects": 38,
+   "interconnects": 39,
    "ipam": 53,
    "karpathy": 15,
    "kempner": 68,
-   "latentspace": 42,
+   "latentspace": 44,
    "mats": 28,
    "mechinterp": 18,
    "metr": 3,
-   "mila": 83,
+   "mila": 85,
    "mitocw": 16,
    "mlcollective": 71,
    "mlstpod": 37,
    "mlsys": 114,
    "mpiis": 114,
-   "msr": 92,
+   "msr": 95,
    "ndss": 234,
    "neelnanda": 48,
-   "nopriors": 41,
-   "nyucds": 5,
+   "nopriors": 42,
+   "nyucds": 6,
    "pets": 237,
    "pli": 26,
    "rdi": 148,
-   "riskybiz": 42,
+   "riskybiz": 43,
    "robertmiles": 43,
    "rwc": 96,
-   "scalinglaws": 41,
+   "scalinglaws": 42,
    "schwartzreisman": 207,
    "scw": 40,
    "sfi": 42,
    "simons": 132,
-   "stanford": 188,
-   "stanfordhai": 189,
+   "stanford": 195,
+   "stanfordhai": 191,
    "transluce": 1,
-   "ttic": 126,
-   "twiml": 40,
-   "usenix": 202,
+   "ttic": 128,
+   "twiml": 41,
+   "usenix": 203,
    "uwcse": 113,
    "vector": 70,
    "yalefds": 25,
    "yannic": 115
   }
  },
- "finished": 1794232831,
+ "finished": 1794837856,
  "sources": {
   "3b1b": {
    "errors": [],
@@ -114,7 +114,7 @@
   "ai2": {
    "errors": [],
    "fetched": 60,
-   "new": 1
+   "new": 0
   },
   "aicoffeebreak": {
    "errors": [],
@@ -159,17 +159,17 @@
   "berkeleyeecs": {
    "errors": [],
    "fetched": 120,
-   "new": 1
+   "new": 0
   },
   "bkc": {
    "errors": [],
    "fetched": 98,
-   "new": 3
+   "new": 0
   },
   "blackhat": {
    "errors": [],
-   "fetched": 68,
-   "new": 7
+   "fetched": 66,
+   "new": 2
   },
   "cais": {
    "errors": [],
@@ -184,7 +184,7 @@
   "ccc": {
    "errors": [],
    "fetched": 60,
-   "new": 7
+   "new": 0
   },
   "cerias": {
    "errors": [],
@@ -194,22 +194,22 @@
   "cisac": {
    "errors": [],
    "fetched": 62,
-   "new": 1
+   "new": 0
   },
   "cispa": {
    "errors": [],
    "fetched": 65,
-   "new": 0
+   "new": 1
   },
   "citp": {
    "errors": [],
    "fetched": 120,
-   "new": 1
+   "new": 0
   },
   "cmsa": {
    "errors": [],
    "fetched": 60,
-   "new": 4
+   "new": 0
   },
   "cmulti": {
    "errors": [],
@@ -219,12 +219,12 @@
   "cogrev": {
    "errors": [],
    "fetched": 40,
-   "new": 2
+   "new": 3
   },
   "coherelabs": {
    "errors": [],
    "fetched": 69,
-   "new": 0
+   "new": 6
   },
   "colm": {
    "errors": [],
@@ -244,27 +244,27 @@
   "cylab": {
    "errors": [],
    "fetched": 63,
-   "new": 1
+   "new": 0
   },
   "darknetdiaries": {
    "errors": [],
    "fetched": 40,
-   "new": 1
+   "new": 0
   },
   "defcon": {
    "errors": [],
    "fetched": 60,
-   "new": 60
+   "new": 0
   },
   "dwarkesh": {
    "errors": [],
    "fetched": 40,
-   "new": 0
+   "new": 1
   },
   "effectivealtruism": {
    "errors": [],
    "fetched": 90,
-   "new": 0
+   "new": 1
   },
   "enigma": {
    "errors": [],
@@ -279,17 +279,17 @@
   "farai": {
    "errors": [],
    "fetched": 60,
-   "new": 3
+   "new": 0
   },
   "flipod": {
    "errors": [],
    "fetched": 40,
-   "new": 0
+   "new": 1
   },
   "foresight": {
    "errors": [],
    "fetched": 63,
-   "new": 0
+   "new": 3
   },
   "gdmsafety": {
    "errors": [],
@@ -319,17 +319,17 @@
   "hanlab": {
    "errors": [],
    "fetched": 62,
-   "new": 4
+   "new": 2
   },
   "iacr": {
    "errors": [],
    "fetched": 120,
-   "new": 1
+   "new": 14
   },
   "ias": {
    "errors": [],
    "fetched": 60,
-   "new": 18
+   "new": 15
   },
   "ieeesp": {
    "errors": [],
@@ -339,7 +339,7 @@
   "ifml": {
    "errors": [],
    "fetched": 60,
-   "new": 1
+   "new": 11
   },
   "insideview": {
    "errors": [],
@@ -349,7 +349,7 @@
   "interconnects": {
    "errors": [],
    "fetched": 40,
-   "new": 0
+   "new": 1
   },
   "ipam": {
    "errors": [],
@@ -369,12 +369,12 @@
   "latentspace": {
    "errors": [],
    "fetched": 40,
-   "new": 6
+   "new": 2
   },
   "mats": {
    "errors": [],
    "fetched": 29,
-   "new": 1
+   "new": 0
   },
   "mechinterp": {
    "errors": [],
@@ -389,12 +389,12 @@
   "mila": {
    "errors": [],
    "fetched": 73,
-   "new": 0
+   "new": 6
   },
   "mitocw": {
    "errors": [],
    "fetched": 66,
-   "new": 0
+   "new": 25
   },
   "mlcollective": {
    "errors": [],
@@ -419,7 +419,7 @@
   "msr": {
    "errors": [],
    "fetched": 60,
-   "new": 2
+   "new": 6
   },
   "ndss": {
    "errors": [],
@@ -438,8 +438,8 @@
   },
   "nyucds": {
    "errors": [],
-   "fetched": 72,
-   "new": 1
+   "fetched": 71,
+   "new": 3
   },
   "pets": {
    "errors": [],
@@ -459,12 +459,12 @@
   "riskybiz": {
    "errors": [],
    "fetched": 40,
-   "new": 2
+   "new": 1
   },
   "robertmiles": {
    "errors": [],
    "fetched": 61,
-   "new": 0
+   "new": 1
   },
   "rwc": {
    "errors": [],
@@ -494,17 +494,17 @@
   "simons": {
    "errors": [],
    "fetched": 120,
-   "new": 10
+   "new": 0
   },
   "stanford": {
    "errors": [],
-   "fetched": 65,
-   "new": 6
+   "fetched": 62,
+   "new": 14
   },
   "stanfordhai": {
    "errors": [],
    "fetched": 83,
-   "new": 11
+   "new": 4
   },
   "transluce": {
    "errors": [],
@@ -514,7 +514,7 @@
   "ttic": {
    "errors": [],
    "fetched": 60,
-   "new": 0
+   "new": 3
   },
   "twiml": {
    "errors": [],
@@ -524,12 +524,12 @@
   "usenix": {
    "errors": [],
    "fetched": 74,
-   "new": 60
+   "new": 1
   },
   "uwcse": {
    "errors": [],
-   "fetched": 62,
-   "new": 4
+   "fetched": 61,
+   "new": 0
   },
   "vector": {
    "errors": [],
@@ -547,5 +547,5 @@
    "new": 0
   }
  },
- "started": 1794232806
+ "started": 1794837820
 }
